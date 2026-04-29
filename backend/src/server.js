@@ -6,7 +6,10 @@ const initDB = require('./models/init');
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://portfolio-manager-r2z9qm8p9-alley1108s-projects.vercel.app'],
+  credentials: true
+}));
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/auth'));
