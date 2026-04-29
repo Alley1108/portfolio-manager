@@ -95,7 +95,6 @@ useEffect(() => { fetchPortfolio(); }, []); // eslint-disable-line react-hooks/e
         <tr><td>Sell Price</td><td>${h.sell_price ? '₹'+h.sell_price : 'Still Holding'}</td></tr>
         <tr><td>Sell Date</td><td>${h.sell_date?.slice(0,10) || '—'}</td></tr>
         <tr><td>Invested Amount</td><td>₹${invested.toFixed(2)}</td></tr>
-        <tr><td>Current Value</td><td>₹${current.toFixed(2)}</td></tr>
         <tr><td>P&L</td><td class="pnl">${pnl >= 0 ? '+' : ''}₹${pnl.toFixed(2)}</td></tr>
       </table>
       <p style="margin-top:30px;color:#999;">Generated on ${new Date().toLocaleString()}</p>
