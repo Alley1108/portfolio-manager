@@ -139,7 +139,6 @@ useEffect(() => { fetchPortfolio(); }, []); // eslint-disable-line react-hooks/e
           </div>
           {holdings.map(h => {
             const invested = getVal(h, 'investedAmount', 'investedamount');
-            const current = getVal(h, 'currentAmount', 'currentamount');
             const currentPrice = getVal(h, 'currentPrice', 'currentprice');
             const pnl = getVal(h, 'pnl');
             return (
