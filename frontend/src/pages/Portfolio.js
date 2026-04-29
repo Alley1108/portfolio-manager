@@ -14,7 +14,7 @@ export default function Portfolio() {
   const [sellForm, setSellForm] = useState({ sell_price: '', sell_date: '' });
   const [fetchingPrice, setFetchingPrice] = useState(false);
 
-  useEffect(() => { fetchPortfolio(); }, []);
+useEffect(() => { fetchPortfolio(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchPortfolio = async () => {
     try {
@@ -79,7 +79,6 @@ export default function Portfolio() {
 
   const printBill = (h) => {
     const invested = getVal(h, 'investedAmount', 'investedamount');
-    const current = getVal(h, 'currentAmount', 'currentamount');
     const pnl = getVal(h, 'pnl');
     const win = window.open('', '_blank');
     win.document.write(`
