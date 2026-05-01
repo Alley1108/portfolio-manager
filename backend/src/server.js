@@ -7,7 +7,11 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://portfolio-manager-r2z9qm8p9-alley1108s-projects.vercel.app'],
+  origin: [
+    'http://localhost:3000',
+    'https://portfolio-manager-seven-kohl.vercel.app',
+    'https://portfolio-manager-iyjy6cb75-alley1108s-projects.vercel.app'
+  ],
   credentials: true
 }));
 app.use(express.json());
