@@ -25,10 +25,12 @@ app.get('/', (req, res) => {
   res.json({ message: 'Portfolio Manager API is running' });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, async () => {
-  await initDB();
-  console.log(`Server running on port ${PORT}`);
-});
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, async () => {
+    await initDB();
+    console.log(`Server running on port ${PORT}`);
+  });
+}
 
 module.exports = app;
