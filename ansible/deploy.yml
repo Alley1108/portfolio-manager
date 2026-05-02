@@ -1,0 +1,57 @@
+---
+- name: Deploy Portfolio Manager
+  hosts: localhost
+  connection: local
+  become: false
+
+  vars:
+    app_dir: "{{ playbook_dir }}/.."
+    
+  tasks:
+    - name: Check Docker is running
+      command: docker info
+      register: docker_info
+      
+    - name: Print Docker status
+      debug:
+        msg: "Docker is running successfully"
+
+    - name: Pull latest code from GitHub
+      git:
+        repo: 'https://github.com/Alley1108/portfolio-manager.git'
+        dest: "{{ app_dir }}"
+        version: main
+        force: yes
+
+    - name: Stop existing containers
+      command: docker compose down
+      args:
+        chdir: "{{ app_dir }}"
+      ignore_errors: yes
+
+    - name: Build Docker images
+      command: docker compose build
+      args:
+        chdir: "{{ app_dir }}"
+
+    - name: Start all containers
+      command: docker compose up -d
+      args:
+        chdir: "{{ app_dir }}"
+
+    - name: Wait for backend to be ready
+      wait_for:
+        port: 5000
+        delay: 5
+        timeout: 60
+
+    - name: Verify application is running
+      uri:
+        url: http://localhost:5000/
+        method: GET
+        status_code: 200
+      register: health_check
+
+    - name: Print deployment status
+      debug:
+        msg: "Portfolio Manager deployed successfully! API responding at http://localhost:5000"
